@@ -1,32 +1,56 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <el-container>
+      <el-header style="height: 61px" >
+        <Menu ></Menu>
+      </el-header>
+      <el-main>
+        <router-view/>
+      </el-main>
+      <el-footer style="height: 100px">
+        <Footer></Footer>
+      </el-footer>
+    </el-container>
   </div>
 </template>
 
+<script>
+  import Menu from "./views/menu/Menu"
+  import Home from "./views/Home";
+  import Footer from "./views/footer/Footer";
+
+  export default {
+    name: "App",
+    components: {
+      Menu,
+      Home,
+      Footer
+    },
+    mounted() {
+     /* const oScript = document.createElement('script');
+      oScript.type = 'text/javascript';
+      oScript.src = 'http://pv.sohu.com/cityjson?ie=utf-8';
+      document.body.appendChild(oScript);
+      oScript.src = 'https://ssl.captcha.qq.com/TCaptcha.js';
+      document.body.appendChild(oScript);*/
+    }
+  }
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  @import "assets/css/base.css";
 
-#nav {
-  padding: 30px;
-}
+  .el-container {
+    width: 1190px;
+    border: 1px solid #eee;
+    margin: 0 auto
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  .el-header {
+    border-bottom: 1px solid #dcdfe6;
+    color: #409EFF;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .el-footer{
+    border-top: 1px solid #dcdfe6;
+  }
 </style>
