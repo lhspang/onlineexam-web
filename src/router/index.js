@@ -7,17 +7,20 @@ const Home = () => import('views/Home')
 const About = () => import('views/About.vue')
 const Login = () => import('views/passport/Login')
 const Register = () => import('views/passport/Register')
-const Profile = ()=>import('views/profile/Profile')
+const Profile = () => import('views/profile/Profile')
+const ExamList = () => import('views/profile/ExamList')
+const UserInfo = () => import('views/profile/UserInfo')
+const Test = () => import('views/profile/Test')
+const Score = () => import('views/profile/Score')
 
 const routes = [
   {
-    path: "/1",
-    redirect: "/"
-  },
-  {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      roles: ['', '管理员', '学生', '老师',]
+    }
   },
   {
     path: '/about',
@@ -36,8 +39,33 @@ const routes = [
   },
   {
     path: '/profile',
-    name: "Profile",
-    component: Profile
+    name: 'Profile',
+    component: Profile,
+    meta: {
+      roles: ['管理员', '学生', '老师',]
+    },
+    children: [
+      {
+        path: '',
+        redirect: 'examlist'
+      },
+      {
+        path: 'examlist',
+        component: ExamList
+      },
+      {
+        path: 'test',
+        component: Test
+      },
+      {
+        path: 'score',
+        component: Score
+      },
+      {
+        path: 'info',
+        component: UserInfo
+      }
+    ]
   }
 ]
 
@@ -45,6 +73,7 @@ const router = new VueRouter({
   routes,
   mode: "history"
 })
+
 const url = ['', 'login', 'register', 'zhibo', 'kecheng', 'about']
 router.beforeEach((to, from, next) => {
   /*for (let u of url) {

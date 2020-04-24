@@ -66,8 +66,9 @@
             if (!res.data.success) {
               this.$message.error(res.data.message);
             } else {
-              this.$message("登录成功");
-              this.$router.push("/profile")
+              this.$store.commit('changeLogin',res.data.data);
+              // this.$router.push("/profile")
+              window.location.href="/profile"
             }
           }).catch(res => {
               this.$message.error("登录失败，请稍后再试");

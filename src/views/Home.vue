@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Banner from "./banner/Banner";
+import Banner from "views/banner/Banner";
 export default {
   name: 'Home',
   components: {

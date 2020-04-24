@@ -1,23 +1,22 @@
 <template>
   <div>
     <div class="logo">
-      <a href="/" >在线考试系统</a>
+      <a href="/">在线考试系统</a>
     </div>
-    <div class="menu" >
+    <div class="menu">
       <el-menu :default-active="activeIndex"
                class="el-menu-demo"
                mode="horizontal"
                text-color="#409EFF"
-               :router=true
                @select="handleSelect">
         <el-menu-item index="/">首页</el-menu-item>
-        <el-menu-item index="zhibo">直播</el-menu-item>
-        <el-menu-item index="kecheng">课程</el-menu-item>
-        <el-menu-item index="about">关于我们</el-menu-item>
-        <el-menu-item index="login">登录</el-menu-item>
-        <el-menu-item index="register">注册</el-menu-item>
-        <el-menu-item v-show="false" index="profile">个人中心</el-menu-item>
-        <el-menu-item v-show="false" >退出</el-menu-item>
+        <el-menu-item index="/zhibo">直播</el-menu-item>
+        <el-menu-item index="/kecheng">课程</el-menu-item>
+        <el-menu-item index="/about">关于我们</el-menu-item>
+        <el-menu-item index="/login" v-show="!isShow">登录</el-menu-item>
+        <el-menu-item index="/register" v-show="!isShow">注册</el-menu-item>
+        <el-menu-item index="/profile/examlist" v-show="isShow">个人中心</el-menu-item>
+        <el-menu-item index="/logout" v-show="isShow">退出</el-menu-item>
       </el-menu>
     </div>
   </div>
@@ -29,12 +28,18 @@
     data() {
       return {
         activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex2: '1',
+        isShow: localStorage.getItem("isAuth")
       };
     },
     methods: {
       handleSelect(key, keyPath) {
-        // console.log(key, keyPath);
+        if (key === "/logout") {
+          localStorage.clear();
+          window.location.href = "/"
+        } else {
+          this.$router.push(key)
+        }
       }
     }
   }
