@@ -15,7 +15,7 @@
         <el-menu-item index="/about">关于我们</el-menu-item>
         <el-menu-item index="/login" v-show="!isShow">登录</el-menu-item>
         <el-menu-item index="/register" v-show="!isShow">注册</el-menu-item>
-        <el-menu-item index="/profile/examlist" v-show="isShow">个人中心</el-menu-item>
+        <el-menu-item index="/profile/index" v-show="isShow">个人中心</el-menu-item>
         <el-menu-item index="/logout" v-show="isShow">退出</el-menu-item>
       </el-menu>
     </div>
@@ -27,15 +27,14 @@
     name: "Menu",
     data() {
       return {
-        activeIndex: '1',
-        activeIndex2: '1',
-        isShow: localStorage.getItem("isAuth")
+        activeIndex: this.$route.path,
+        isShow: this.$store.state.user.isLogin
       };
     },
     methods: {
       handleSelect(key, keyPath) {
         if (key === "/logout") {
-          localStorage.clear();
+          this.$store.commit('resetState');
           window.location.href = "/"
         } else {
           this.$router.push(key)

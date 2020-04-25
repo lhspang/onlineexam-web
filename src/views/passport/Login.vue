@@ -7,7 +7,9 @@
           <div class="pp">登录</div>
         </div>
         <div class="title_right">
-          <div class="title_right_txt">还没有账号？<a href="/register"><span class="blue">立即注册</span></a></div>
+          <div class="title_right_txt">还没有账号？
+            <a href="javascript:void(0)" @click="$router.push('/register')"><span class="blue">立即注册</span></a>
+          </div>
         </div>
       </div>
       <div class="main_r_content">
@@ -21,10 +23,10 @@
             prefix-icon="el-icon-lock"
             size="large"
             v-model="loginForm.password"
-            show-password>
+            show-password
+            @keyup.enter.native="btnClick">
           </el-input>
         </div>
-
         <div class="xieyi">
           <el-checkbox v-model="checked">记住我</el-checkbox>
           <a href="#"><span class="blue" style=" padding-left:130px; cursor:pointer">忘记密码?</span></a>
@@ -36,7 +38,7 @@
 </template>
 
 <script>
-  import {request,Qs} from "network/request";
+  import {request, Qs} from "network/request";
 
   export default {
     name: "Login",
@@ -66,9 +68,8 @@
             if (!res.data.success) {
               this.$message.error(res.data.message);
             } else {
-              this.$store.commit('changeLogin',res.data.data);
-              // this.$router.push("/profile")
-              window.location.href="/profile"
+              this.$store.commit('changeLogin', res.data.data);
+              window.location.href = '/profile/index'
             }
           }).catch(res => {
               this.$message.error("登录失败，请稍后再试");
@@ -136,7 +137,7 @@
   }
 
   .title_right_txt {
-    margin-top: 50px;
+    margin-top: 40px;
   }
 
   .main_r_content {

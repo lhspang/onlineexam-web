@@ -1,7 +1,7 @@
 <template>
   <el-container class="index_cont">
     <el-header style="height: 61px" >
-      <Menu ></Menu>
+      <MainMenu></MainMenu>
     </el-header>
     <el-main style="height: 700px">
       <router-view/>
@@ -13,14 +13,14 @@
 </template>
 
 <script>
-  import Menu from "views/menu/Menu"
+  import MainMenu from "views/menu/MainMenu"
   import Home from "views/Home";
   import Footer from "views/footer/Footer";
 
   export default {
     name: "Index",
     components: {
-      Menu,
+      MainMenu,
       Home,
       Footer
     },

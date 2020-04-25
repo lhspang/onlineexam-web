@@ -1,10 +1,10 @@
 <template>
-  <h2>user score</h2>
+
 </template>
 
 <script>
   export default {
-    name: "Score"
+    name: "QueryExam"
   }
 </script>
 

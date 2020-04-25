@@ -8,13 +8,17 @@ function request(config) {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   })
   instance.interceptors.request.use(config => {
-      if (localStorage.getItem('Authorization')) {
-        config.headers.Authorization = localStorage.getItem('Authorization');
-      }
+    let url = config.url;
+    if (url.indexOf('login') !== -1 || url.indexOf('register') !== -1 || url.indexOf('captcha') !== -1) {
       return config;
-    }, error => {
-      return Promise.reject(error);
-    })
+    } else {
+      // config.headers.Authorization = this.$store.state.user.Authorization;
+      config.headers.Authorization = JSON.parse(sessionStorage.getItem('store')).user.Authorization;
+      return config;
+    }
+  }, error => {
+    return Promise.reject(error);
+  })
 
   return instance(config)
 }
