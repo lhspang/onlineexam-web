@@ -1,11 +1,11 @@
 <template>
-  <el-container>
+  <el-container style="height: 650px">
     <el-aside width="200px">
       <StudentMenu v-show="roleName==='学生'"></StudentMenu>
       <TeacherMenu v-show="roleName==='老师'"></TeacherMenu>
       <ManagerMenu v-show="roleName==='管理员'"></ManagerMenu>
     </el-aside>
-    <el-main>
+    <el-main >
       <router-view></router-view>
     </el-main>
   </el-container>

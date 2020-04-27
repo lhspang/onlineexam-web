@@ -5,7 +5,7 @@
     @select="handleSelect">
     <el-menu-item index="/profile/index">
       <i class="el-icon-menu"></i>
-      <span slot="title">系统信息</span>
+      <span slot="title">欢迎页</span>
     </el-menu-item>
     <el-menu-item index="/profile/student/examlist">
       <i class="el-icon-menu"></i>

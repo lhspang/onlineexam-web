@@ -5,7 +5,7 @@
     @select="handleSelect">
     <el-menu-item index="/profile/index">
       <i class="el-icon-menu"></i>
-      <span slot="title">系统信息</span>
+      <span slot="title">欢迎页</span>
     </el-menu-item>
     <el-submenu index="1">
       <template slot="title">
@@ -20,7 +20,7 @@
         <i class="el-icon-location"></i>
         <span>人员管理</span>
       </template>
-      <el-menu-item index="/profile/user/add">添加人员</el-menu-item>
+<!--      <el-menu-item index="/profile/user/add">添加人员</el-menu-item>-->
       <el-menu-item index="/profile/user/all">查询人员</el-menu-item>
     </el-submenu>
     <el-submenu index="3">

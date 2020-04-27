@@ -3,7 +3,7 @@
     <el-header style="height: 61px" >
       <MainMenu></MainMenu>
     </el-header>
-    <el-main style="height: 700px">
+    <el-main >
       <router-view/>
     </el-main>
     <el-footer style="height: 100px">

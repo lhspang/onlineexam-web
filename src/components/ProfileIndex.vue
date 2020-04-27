@@ -1,5 +1,7 @@
 <template>
-  <h2 style="margin-left: 200px">欢迎使用考试系统</h2>
+  <div class="title">
+    欢迎使用考试系统
+  </div>
 </template>
 
 <script>
@@ -9,5 +11,11 @@
 </script>
 
 <style scoped>
-
+  .title{
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 30px;
+  }
 </style>

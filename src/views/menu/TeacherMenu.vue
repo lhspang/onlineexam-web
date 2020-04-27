@@ -5,7 +5,7 @@
     @select="handleSelect">
     <el-menu-item index="/profile/index">
       <i class="el-icon-menu"></i>
-      <span slot="title">系统信息</span>
+      <span slot="title">欢迎页</span>
     </el-menu-item>
     <el-submenu index="1">
       <template slot="title">
@@ -28,7 +28,6 @@
         <i class="el-icon-location"></i>
         <span>成绩管理</span>
       </template>
-<!--      <el-menu-item index="/profile/problem/add">添加试题</el-menu-item>-->
       <el-menu-item index="/profile/score/all">查询成绩</el-menu-item>
     </el-submenu>
 

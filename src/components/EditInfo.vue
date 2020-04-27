@@ -28,7 +28,6 @@
         </el-form-item>
       </el-form>
     </div>
-
   </div>
 </template>
 
@@ -101,9 +100,6 @@
             request({
               method:'put',
               url: '/user/'+this.editForm.userId+"?"+Qs.stringify(data),
-              /*headers:{
-                "Authorization": this.$store.state.user.Authorization
-              }*/
             }).then(res => {
               if (!res.data.success) {
                 this.$message.error(res.data.message);

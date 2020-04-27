@@ -24,6 +24,9 @@
             <el-button class="sentCode" @click="codeBtnClick" v-show="!isDisable" disabled type="primary">{{count}}秒
             </el-button>
           </el-form-item>
+          <el-form-item label="邮箱" prop="email">
+            <el-input v-model="registerForm.email"></el-input>
+          </el-form-item>
           <el-form-item label="用户名" prop="username">
             <el-input v-model="registerForm.username"></el-input>
           </el-form-item>
@@ -46,25 +49,11 @@
   export default {
     name: "Register",
     data() {
-      const registerCheckPhone = (rule, value, callback) => {
+      const registerCheck = (rule, value, callback) => {
         request({
           url: '/register/check',
           params: {
-            account: this.registerForm.phone
-          }
-        }).then(res => {
-          if (!res.data.success) {
-            callback(new Error(res.data.message));
-          } else {
-            callback();
-          }
-        })
-      };
-      const registerCheckName = (rule, value, callback) => {
-        request({
-          url: '/register/check',
-          params: {
-            account: this.registerForm.username
+            account: value
           }
         }).then(res => {
           if (!res.data.success) {
@@ -88,11 +77,19 @@
           callback();
         }
       };
+      const validateEmail = (rule, value, callback) => {
+        if (!(/^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/.test(value))) {
+          callback(new Error('邮箱格式不正确'));
+        } else {
+          callback();
+        }
+      };
       return {
         isDisable: true,
         count: 60,
         registerForm: {
           phone: '',
+          email: '',
           code: '',
           username: '',
           password: '',
@@ -102,7 +99,12 @@
           phone: [
             {required: true, message: '手机号不能为空', trigger: 'blur'},
             {validator: validatePhone, trigger: 'blur'},
-            {validator: registerCheckPhone, trigger: 'blur'}
+            {validator: registerCheck, trigger: 'blur'}
+          ],
+          email: [
+            {required: true, message: '邮箱不能为空', trigger: 'blur'},
+            {validator: validateEmail, trigger: 'blur'},
+            {validator: registerCheck, trigger: 'blur'}
           ],
           code: [
             {required: true, message: '验证码不能为空', trigger: 'blur'}
@@ -110,7 +112,7 @@
           username: [
             {required: true, message: '请输入用户名', trigger: 'blur'},
             {min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur'},
-            {validator: registerCheckName, trigger: 'blur'}
+            {validator: registerCheck, trigger: 'blur'}
           ],
           password: [
             {required: true, message: '请输入密码', trigger: 'blur'},
