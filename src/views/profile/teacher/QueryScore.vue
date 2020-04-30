@@ -62,7 +62,7 @@
     created() {
       request({
         method: 'get',
-        url: '/subject/all'
+        url: '/user/'+this.$store.state.user.userId+'/subject'
       }).then(res => {
         if (!res.data.success) {
           this.$message.error(res.data.message);

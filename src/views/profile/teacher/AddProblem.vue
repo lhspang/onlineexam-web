@@ -24,24 +24,24 @@
       <el-form-item label="题干：" prop="problemDesc">
         <el-input type="textarea" v-model="problemForm.problemDesc"></el-input>
       </el-form-item>
-      <el-form-item label="选项1:" prop="problemOption1">
-        <el-input v-model.trim="problemForm.problemOption1"></el-input>
+      <el-form-item label="A：" prop="problemOption1">
+        <el-input type="textarea" v-model.trim="problemForm.problemOption1"></el-input>
       </el-form-item>
-      <el-form-item label="选项2:" prop="problemOption2">
-        <el-input v-model.trim="problemForm.problemOption2"></el-input>
+      <el-form-item label="B：" prop="problemOption2">
+        <el-input type="textarea" v-model.trim="problemForm.problemOption2"></el-input>
       </el-form-item>
-      <el-form-item v-show="isShow" label="选项3:" prop="problemOption3">
-        <el-input v-model.trim="problemForm.problemOption3"></el-input>
+      <el-form-item  v-show="isShow" label="C：" prop="problemOption3">
+        <el-input type="textarea" v-model.trim="problemForm.problemOption3"></el-input>
       </el-form-item>
-      <el-form-item v-show="isShow" label="选项4:" prop="problemOption4">
-        <el-input v-model.trim="problemForm.problemOption4"></el-input>
+      <el-form-item v-show="isShow" label="D：" prop="problemOption4">
+        <el-input type="textarea" v-model.trim="problemForm.problemOption4"></el-input>
       </el-form-item>
       <el-form-item label="正确答案" prop="checkList">
         <el-checkbox-group v-model="checkList">
-          <el-checkbox label="选项1"></el-checkbox>
-          <el-checkbox label="选项2"></el-checkbox>
-          <el-checkbox v-show="isShow" label="选项3"></el-checkbox>
-          <el-checkbox v-show="isShow" label="选项4"></el-checkbox>
+          <el-checkbox label="A"></el-checkbox>
+          <el-checkbox label="B"></el-checkbox>
+          <el-checkbox v-show="isShow" label="C"></el-checkbox>
+          <el-checkbox v-show="isShow" label="D"></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
       <el-form-item>
@@ -78,7 +78,7 @@
     created() {
       request({
         method: 'get',
-        url: '/subject/all'
+        url: '/user/'+this.$store.state.user.userId+'/subject'
       }).then(res => {
         if (!res.data.success) {
           this.$message.error(res.data.message);
@@ -141,7 +141,10 @@
               if (!res.data.success) {
                 this.$message.error(res.data.message);
               } else {
-                this.$message('添加成功');
+                this.$message({
+                  message:'添加成功',
+                  type:'success'
+                });
                 this.checkList = [];
                 this.rightList = [];
                 this.$refs[formName].resetFields()
@@ -158,7 +161,7 @@
 
 <style scoped>
   .edit_cont {
-    width: 300px;
+    width: 330px;
     margin: 0 auto;
     margin-top: 20px;
   }

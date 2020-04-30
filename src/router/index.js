@@ -26,6 +26,7 @@ const AddUser = () => import('views/profile/manager/AddUser')
 const QueryUser = () => import('views/profile/manager/QueryUser')
 const AddSubject = () => import('views/profile/manager/AddSubject')
 const QuerySubject = () => import('views/profile/manager/QuerySubject')
+const EditUserSubject = () => import('views/profile/manager/EditUserSubject')
 
 const routes = [
   {
@@ -112,6 +113,10 @@ const routes = [
       {
         path: 'user/all',
         component: QueryUser
+      },
+      {
+        path: 'user/subject/:id',
+        component: EditUserSubject
       },
       {
         path: 'subject/add',

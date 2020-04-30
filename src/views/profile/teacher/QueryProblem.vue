@@ -25,22 +25,22 @@
       <el-table-column
         prop="problemOption1"
         label="选项1"
-        width="100">
+        width="130">
       </el-table-column>
       <el-table-column
         prop="problemOption2"
         label="选项2"
-        width="100">
+        width="130">
       </el-table-column>
       <el-table-column
         prop="problemOption3"
         label="选项3"
-        width="100">
+        width="130">
       </el-table-column>
       <el-table-column
         prop="problemOption4"
         label="选项4"
-        width="100">
+        width="130">
       </el-table-column>
     </el-table>
     <el-pagination
@@ -70,7 +70,7 @@
     created() {
       request({
         method: 'get',
-        url: '/subject/all'
+        url: '/user/'+this.$store.state.user.userId+'/subject'
       }).then(res => {
         if (!res.data.success) {
           this.$message.error(res.data.message);

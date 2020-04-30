@@ -105,15 +105,13 @@
                 this.$message.error(res.data.message);
               } else {
                 this.$message('修改成功');
-                // window.location.reload();
               }
             })
           } else {
             return false;
           }
         });
-      }
-      ,
+      },
       goBack() {
         this.$router.go(-1);
       }

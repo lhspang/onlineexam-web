@@ -18,10 +18,10 @@
     <el-submenu index="2">
       <template slot="title">
         <i class="el-icon-location"></i>
-        <span>人员管理</span>
+        <span>用户管理</span>
       </template>
 <!--      <el-menu-item index="/profile/user/add">添加人员</el-menu-item>-->
-      <el-menu-item index="/profile/user/all">查询人员</el-menu-item>
+      <el-menu-item index="/profile/user/all">查询用户</el-menu-item>
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">

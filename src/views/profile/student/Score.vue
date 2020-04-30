@@ -16,6 +16,12 @@
         width="300">
       </el-table-column>
       <el-table-column
+        prop="subject.subjectName"
+        label="科目"
+        sortable
+        width="100">
+      </el-table-column>
+      <el-table-column
         prop="totalScore"
         label="总分数"
         sortable

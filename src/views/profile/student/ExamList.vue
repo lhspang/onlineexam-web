@@ -20,22 +20,27 @@
       <el-table-column
         prop="examSdate"
         label="开始日期"
-        width="180">
+        width="170">
+      </el-table-column>
+      <el-table-column
+        prop="examEdate"
+        label="结束日期"
+        width="170">
       </el-table-column>
       <el-table-column
         prop="examName"
         label="考试名字"
-        width="200">
+        width="190">
       </el-table-column>
       <el-table-column
         prop="examLong"
         label="考试时长(分钟)"
-        width="120">
+        width="80">
       </el-table-column>
       <el-table-column
         prop="subject.subjectName"
         label="考试科目"
-        width="100">
+        width="80">
       </el-table-column>
       <el-table-column
         prop="examId"
@@ -76,8 +81,6 @@
           this.$message.error("查询信息失败，请稍后再试");
         }
       )
-
-
     },
     methods:{
       getExam(value) {
@@ -108,7 +111,6 @@
           this.$router.replace('/exam/'+row.examId)
         }).catch(() => {
         });
-
       }
     }
   }

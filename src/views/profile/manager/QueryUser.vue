@@ -40,6 +40,32 @@
         sortable
         width="300">
       </el-table-column>
+      <el-table-column
+        prop="examId"
+        label="操作"
+        width="250">
+        <template slot-scope="scope">
+          <el-popover
+            placement="left"
+            width="400"
+            trigger="click">
+            <div style="height: 100px">
+              <el-select v-model="newRoleId" placeholder="请选择身份">
+                <el-option
+                  v-for="item in roleList"
+                  :key="item.roleId"
+                  :label="item.roleName"
+                  :value="item.roleId">
+                </el-option>
+              </el-select>
+              <br/>
+              <el-button style="margin-top: 20px" @click="updateRole" type="primary">保存</el-button>
+            </div>
+            <el-button @click="handleClick(scope.row)" slot="reference" type="primary">修改角色</el-button>
+          </el-popover>
+          <el-button v-show="roleId===2" @click="ediaSubject(scope.row)" type="primary">修改所授科目</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       background
@@ -60,9 +86,11 @@
       return {
         roleList: [],
         roleId: '',
+        newRoleId: '',
         userList: [],
         total: 0,
         pageNum: 1,
+        editUserId: '',
       }
     },
     created() {
@@ -91,7 +119,9 @@
           if (!res.data.success) {
             this.$message.error(res.data.message);
           } else {
-            this.userList = res.data.data.list;
+            this.userList = res.data.data.list.filter(data => {
+              return data.userId !== this.$store.state.user.userId
+            });
             this.total = res.data.data.total;
           }
         }).catch(res => {
@@ -102,6 +132,32 @@
       currentChange(currentPage) {
         this.pageNum = currentPage;
         this.getUser(this.roleId);
+      },
+      handleClick(row) {
+        this.editUserId = row.userId;
+      },
+      ediaSubject(row) {
+        this.$router.push('/profile/user/subject/' + row.userId)
+      },
+      updateRole() {
+        request({
+          method: 'put',
+          url: '/user/' + this.editUserId + '/' + this.newRoleId,
+        }).then(res => {
+          if (!res.data.success) {
+            this.$message.error(res.data.message);
+          } else {
+            this.$message({
+              message: '修改成功',
+              type: 'success'
+            });
+            this.editUserId = '';
+            this.newRoleId = '';
+          }
+        }).catch(res => {
+            this.$message.error("修改失败，请稍后再试");
+          }
+        )
       }
     }
   }

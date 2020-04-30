@@ -2,7 +2,7 @@
   <div class="edit_cont">
     <el-form ref="problemForm" :model="examForm" label-width="100px">
       <el-form-item label="科目：" prop="subjectId">
-        <el-select v-model="examForm.subjectId" placeholder="请选择">
+        <el-select @change="handleSubject" v-model="examForm.subjectId" placeholder="请选择">
           <el-option
             v-for="item in subjectList"
             :key="item.subjectId"
@@ -222,7 +222,7 @@
     created() {
       request({
         method: 'get',
-        url: '/subject/all'
+        url: '/user/' + this.$store.state.user.userId + '/subject'
       }).then(res => {
         if (!res.data.success) {
           this.$message.error(res.data.message);
@@ -233,13 +233,17 @@
     },
     methods: {
       getProblem(protypeId) {
+        if (this.examForm.subjectId === '' || this.examForm.subjectId === null) {
+          return false;
+        }
         this.protypeId = protypeId;
+        console.log(protypeId);
         this.problemList = [];
         request({
           method: 'get',
           url: '/problem/all',
           params: {
-            subjectId: this.subjectId,
+            subjectId: this.examForm.subjectId,
             pageNum: this.pageNum,
             protypeId: protypeId,
           }
@@ -263,6 +267,9 @@
           }
         }
       },
+      handleSubject(value) {
+        this.examForm.subjectId = value;
+      },
       btnClick(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -274,8 +281,8 @@
               examTotalscore: this.examForm.examTotalscore,
               subjectId: this.examForm.subjectId,
               userId: this.examForm.userId,
-              itemPro:this.itemPro.toString(),
-              itemScore:this.itemScore.toString()
+              itemPro: this.itemPro.toString(),
+              itemScore: this.itemScore.toString()
             }
             request({
               method: 'post',
@@ -286,8 +293,8 @@
                 this.$message.error(res.data.message);
               } else {
                 this.$message({
-                  message:'添加成功',
-                  type:'success'
+                  message: '添加成功',
+                  type: 'success'
                 });
                 this.$refs[formName].resetFields()
               }

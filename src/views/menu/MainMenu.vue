@@ -27,7 +27,7 @@
     name: "Menu",
     data() {
       return {
-        activeIndex: this.$route.path,
+        // activeIndex: this.$route.path,
         isShow: this.$store.state.user.isLogin
       };
     },
@@ -40,7 +40,18 @@
           this.$router.push(key)
         }
       }
+    },
+    computed: {
+      activeIndex() {
+        let path = this.$route.path;
+        if (path.indexOf('profile') !== -1) {
+          return '/profile/index';
+        } else {
+          return path;
+        }
+      }
     }
+
   }
 </script>
 

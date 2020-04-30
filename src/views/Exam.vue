@@ -153,8 +153,8 @@
             this.$message.error(res.data.message);
           } else {
             this.$message({
-              message:'提交成功，请到成绩查询页面查询成绩',
-              type:'success'
+              message: '提交成功，请到成绩查询页面查询成绩',
+              type: 'success'
             });
             this.$router.push("/profile/index")
           }
@@ -181,10 +181,10 @@
     },
     computed: {
       // 倒计时
-      second: function () {
+      second() {
         return this.num(this.seconds);
       },
-      minute: function () {
+      minute() {
         return this.num(this.minutes);
       },
     }
