@@ -26,7 +26,10 @@
       {{user.lastLoginTime}}
     </div>
     <div class="info_item">
-      <el-button @click="btnClick" type="primary" icon="el-icon-edit">修改信息</el-button>
+      <el-button @click="infoClick" type="primary" icon="el-icon-edit">修改信息</el-button>
+      <br/>
+      <br/>
+      <el-button @click="passClick" type="primary" icon="el-icon-edit">修改密码</el-button>
     </div>
   </div>
 </template>
@@ -46,14 +49,16 @@
           phone: this.$store.state.user.phone,
           email: this.$store.state.user.email,
           qq: this.$store.state.user.qq,
-          isLogin: false,
           Authorization: this.$store.state.user.Authorization,
         }
       }
     },
     methods:{
-      btnClick(){
+      infoClick(){
         this.$router.push('edit')
+      },
+      passClick(){
+        this.$router.push('pass')
       }
     }
   }

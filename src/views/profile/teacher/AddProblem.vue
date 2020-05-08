@@ -36,8 +36,8 @@
       <el-form-item v-show="isShow" label="D：" prop="problemOption4">
         <el-input type="textarea" v-model.trim="problemForm.problemOption4"></el-input>
       </el-form-item>
-      <el-form-item label="正确答案" prop="checkList">
-        <el-checkbox-group v-model="checkList">
+      <el-form-item label="正确答案" prop="rightList">
+        <el-checkbox-group v-model="rightList">
           <el-checkbox label="A"></el-checkbox>
           <el-checkbox label="B"></el-checkbox>
           <el-checkbox v-show="isShow" label="C"></el-checkbox>
@@ -70,7 +70,7 @@
         },
         protypeList: [],
         subjectList: [],
-        checkList: [],
+        // checkList: [],
         rightList: [],
         isShow: false,
       }
@@ -100,15 +100,11 @@
     methods: {
       protypeChange(value) {
         this.isShow = value === 1 || value === 2;
-        this.checkList = [];
         this.rightList = [];
       },
       btnClick(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            for (let str of this.checkList) {
-              this.rightList.push(str.substring(str.length - 1))
-            }
             let data = {};
             if (this.isShow) {
               data = {
@@ -116,7 +112,7 @@
                 protypeId: this.problemForm.protypeId,
                 problemDesc: this.problemForm.problemDesc,
                 problemRight: this.rightList.toString(),
-                problemCount: this.checkList.length,
+                problemCount: this.rightList.length,
                 problemOption1: this.problemForm.problemOption1,
                 problemOption2: this.problemForm.problemOption2,
                 problemOption3: this.problemForm.problemOption3,
@@ -128,7 +124,7 @@
                 protypeId: this.problemForm.protypeId,
                 problemDesc: this.problemForm.problemDesc,
                 problemRight: this.rightList.toString(),
-                problemCount: this.checkList.length,
+                problemCount: this.rightList.length,
                 problemOption1: this.problemForm.problemOption1,
                 problemOption2: this.problemForm.problemOption2,
               }
@@ -145,7 +141,6 @@
                   message:'添加成功',
                   type:'success'
                 });
-                this.checkList = [];
                 this.rightList = [];
                 this.$refs[formName].resetFields()
               }

@@ -15,8 +15,8 @@
           </div>
           <div class="item_option">
             <el-radio-group v-model="panAndDanOptions[item.problem.problemId]">
-              <el-radio :label="1">{{item.problem.problemOption1}}</el-radio>
-              <el-radio :label="2">{{item.problem.problemOption2}}</el-radio>
+              <el-radio label="A">{{item.problem.problemOption1}}</el-radio>
+              <el-radio label="B">{{item.problem.problemOption2}}</el-radio>
             </el-radio-group>
           </div>
         </div>
@@ -29,10 +29,10 @@
           </div>
           <div class="item_option">
             <el-radio-group v-model="panAndDanOptions[item.problem.problemId]">
-              <el-radio :label="1">{{item.problem.problemOption1}}</el-radio>
-              <el-radio :label="2">{{item.problem.problemOption2}}</el-radio>
-              <el-radio :label="3">{{item.problem.problemOption3}}</el-radio>
-              <el-radio :label="4">{{item.problem.problemOption4}}</el-radio>
+              <el-radio label="A">{{item.problem.problemOption1}}</el-radio>
+              <el-radio label="B">{{item.problem.problemOption2}}</el-radio>
+              <el-radio label="C">{{item.problem.problemOption3}}</el-radio>
+              <el-radio label="D">{{item.problem.problemOption4}}</el-radio>
             </el-radio-group>
           </div>
         </div>
@@ -81,6 +81,9 @@
       }
     },
     created() {
+      if(!this.$store.state.user.isLogin){
+        window.location.href='/login';
+      }
       request({
         method: 'get',
         url: '/exam/' + this.examId + "/student",
@@ -200,7 +203,15 @@
   .el-main {
     margin: 0 auto;
     margin-top: 20px;
-    width: 500px;
+    width: 800px;
+  }
+
+  .el-radio{
+    margin-top: 20px;
+  }
+
+  .el-checkbox{
+    margin-top: 20px;
   }
 
   .pan {

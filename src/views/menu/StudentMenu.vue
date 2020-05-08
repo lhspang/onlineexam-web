@@ -28,7 +28,7 @@
     computed:{
       activeIndex(){
         let path = this.$route.path
-        if(path==='/profile/edit'){
+        if(path==='/profile/edit'||path==='/profile/pass'){
           return '/profile/info'
         }else {
           return path;

@@ -12,6 +12,8 @@ const Profile = () => import('views/profile/Profile')
 const ProfileIndex = ()=>import('components/ProfileIndex')
 const UserInfo = () => import('components/UserInfo')
 const EditInfo = ()=>import('components/EditInfo')
+const EditPass = ()=>import('components/EditPass')
+const FindPass = ()=>import('components/FindPass')
 //学生
 const ExamList = () => import('views/profile/student/ExamList')
 const Score = () => import('views/profile/student/Score')
@@ -21,6 +23,7 @@ const QueryExam = () => import('views/profile/teacher/QueryExam')
 const AddProblem = () => import('views/profile/teacher/AddProblem')
 const QueryProblem = () => import('views/profile/teacher/QueryProblem')
 const QueryScore = () => import('views/profile/teacher/QueryScore')
+const ExamInfo = () => import('views/profile/teacher/ExamInfo')
 //管理员
 const AddUser = () => import('views/profile/manager/AddUser')
 const QueryUser = () => import('views/profile/manager/QueryUser')
@@ -51,6 +54,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/find-pass',
+    name: 'FindPass',
+    component: FindPass
   },
   {
     path: '/exam',
@@ -91,6 +99,10 @@ const routes = [
         component: EditInfo
       },
       {
+        path: 'pass',
+        component: EditPass
+      },
+      {
         path: 'problem/add',
         component: AddProblem
       },
@@ -105,6 +117,10 @@ const routes = [
       {
         path: 'exam/all',
         component: QueryExam
+      },
+      {
+        path: 'exam/:id',
+        component: ExamInfo
       },
       {
         path: 'user/add',
@@ -129,7 +145,7 @@ const routes = [
       {
         path: 'score/all',
         component: QueryScore
-      },
+      }
     ]
   }
 ]

@@ -60,9 +60,16 @@
       }
     },
     created() {
+      let roleName = this.$store.state.user.roleName;
+      let url = '';
+      if (roleName === '管理员') {
+        url = '/subject/all'
+      } else {
+        url = '/user/' + this.$store.state.user.userId + '/subject'
+      }
       request({
         method: 'get',
-        url: '/user/'+this.$store.state.user.userId+'/subject'
+        url: url,
       }).then(res => {
         if (!res.data.success) {
           this.$message.error(res.data.message);

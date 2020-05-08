@@ -1,5 +1,5 @@
 <template>
-  <el-container style="height: 700px">
+  <el-container >
     <el-aside width="200px">
       <StudentMenu v-show="roleName==='学生'"></StudentMenu>
       <TeacherMenu v-show="roleName==='老师'"></TeacherMenu>

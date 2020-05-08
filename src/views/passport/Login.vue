@@ -29,9 +29,9 @@
         </div>
         <div class="xieyi">
           <el-checkbox v-model="checked">记住我</el-checkbox>
-          <a href="#"><span class="blue" style=" padding-left:130px; cursor:pointer">忘记密码?</span></a>
+          <a href="javascript:void(0)" @click="$router.push('/find-pass')"><span class="blue" style=" padding-left:130px; cursor:pointer">忘记密码?</span></a>
         </div>
-        <el-button @click="btnClick" type="primary">登录</el-button>
+        <el-button @click="btnClick" id="Captcha" type="primary">登录</el-button>
       </div>
     </div>
   </div>
@@ -42,6 +42,16 @@
 
   export default {
     name: "Login",
+    mounted() {
+      this.captcha = new TencentCaptcha(
+        '2019980495',
+        res => {
+          if (res.ret === 0) {
+            this.captchaNotice(res);
+          }
+        }
+      );
+    },
     data() {
       return {
         loginForm: {
@@ -49,6 +59,8 @@
           password: ''
         },
         checked: true,
+        captcha: '',
+        userIp: sessionStorage.getItem('ip'),
       }
     },
     methods: {
@@ -56,27 +68,50 @@
         if (this.loginForm.account === '' || this.loginForm.password === '') {
           this.$message.error('账号或密码不能为空');
         } else {
-          let data = {
-            account: this.loginForm.account,
-            password: this.loginForm.password
-          }
-          request({
-            method: 'post',
-            url: '/login',
-            data: Qs.stringify(data)
-          }).then(res => {
-            if (!res.data.success) {
-              this.$message.error(res.data.message);
-            } else {
-              this.$store.commit('changeLogin', res.data.data);
-              window.location.href = '/profile/index'
-            }
-          }).catch(res => {
-              this.$message.error("登录失败，请稍后再试");
-            }
-          )
+          this.captcha.show();
         }
-      }
+      },
+      login() {
+        let data = {
+          account: this.loginForm.account,
+          password: this.loginForm.password
+        }
+        request({
+          method: 'post',
+          url: '/login',
+          data: Qs.stringify(data)
+        }).then(res => {
+          if (!res.data.success) {
+            this.$message.error(res.data.message);
+          } else {
+            this.$store.commit('changeLogin', res.data.data);
+            window.location.href = '/profile/index'
+          }
+        }).catch(res => {
+            this.$message.error("登录失败，请稍后再试");
+          }
+        )
+      },
+      captchaNotice(res) {
+        request({
+          method: 'get',
+          url: '/captcha',
+          params:{
+            ticket:res.ticket,
+            userIp:this.userIp,
+            randstr:res.randstr
+          }
+        }).then(res => {
+          if (!res.data.success) {
+            this.$message.error(res.data.message);
+          } else {
+            this.login();
+          }
+        }).catch(res => {
+            this.$message.error("验证失败，请稍后再试");
+          }
+        )
+      },
     }
   }
 </script>

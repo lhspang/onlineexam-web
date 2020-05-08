@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    :default-active="this.$route.path"
+    :default-active="activeIndex"
     class="el-menu-vertical-demo"
     @select="handleSelect">
     <el-menu-item index="/profile/index">
@@ -41,6 +41,16 @@
 <script>
   export default {
     name: "TeacherMenu",
+    computed:{
+      activeIndex(){
+        let path = this.$route.path
+        if(path==='/profile/edit'||path==='/profile/pass'){
+          return '/profile/info'
+        }else {
+          return path;
+        }
+      }
+    },
     methods: {
       handleSelect(key, keyPath) {
         this.$router.push(key)

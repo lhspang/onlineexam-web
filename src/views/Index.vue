@@ -6,7 +6,7 @@
     <el-main >
       <router-view/>
     </el-main>
-    <el-footer style="height: 100px">
+    <el-footer >
       <Footer></Footer>
     </el-footer>
   </el-container>
@@ -40,6 +40,7 @@
   }
 
   .el-footer {
+    height: 100px;
     border-top: 1px solid #dcdfe6;
   }
 </style>
