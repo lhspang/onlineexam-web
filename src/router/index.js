@@ -37,28 +37,40 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: {
-      roles: ['', '管理员', '学生', '老师',]
+      title: '首页'
     }
   },
   {
     path: '/about',
     name: 'About',
-    component: About
+    component: About,
+    meta: {
+      title: '关于我们'
+    }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      title: '登录'
+    }
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    meta: {
+      title: '注册'
+    }
   },
   {
     path: '/find-pass',
     name: 'FindPass',
-    component: FindPass
+    component: FindPass,
+    meta: {
+      title: '找回密码'
+    }
   },
   {
     path: '/exam',
@@ -67,7 +79,10 @@ const routes = [
   {
     path: '/exam/:id',
     name: 'Exam',
-    component: Exam
+    component: Exam,
+    meta: {
+      title: '考试'
+    }
   },
   {
     path: '/profile',
@@ -80,71 +95,122 @@ const routes = [
       },
       {
         path: 'index',
-        component:ProfileIndex
+        component:ProfileIndex,
+        meta: {
+          title: '个人中心'
+        },
       },
       {
         path: 'student/examlist',
-        component: ExamList
+        component: ExamList,
+        meta: {
+          title: '考试列表'
+        },
       },
       {
         path: 'student/score',
-        component: Score
+        component: Score,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'info',
-        component: UserInfo
+        component: UserInfo,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'edit',
-        component: EditInfo
+        component: EditInfo,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'pass',
-        component: EditPass
+        component: EditPass,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'problem/add',
-        component: AddProblem
+        component: AddProblem,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'problem/all',
-        component: QueryProblem
+        component: QueryProblem,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'exam/add',
-        component: AddExam
+        component: AddExam,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'exam/all',
-        component: QueryExam
+        component: QueryExam,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'exam/:id',
-        component: ExamInfo
+        component: ExamInfo,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'user/add',
-        component: AddUser
+        component: AddUser,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'user/all',
-        component: QueryUser
+        component: QueryUser,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'user/subject/:id',
-        component: EditUserSubject
+        component: EditUserSubject,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'subject/add',
-        component: AddSubject
+        component: AddSubject,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'subject/all',
-        component: QuerySubject
+        component: QuerySubject,
+        meta: {
+          title: ''
+        },
       },
       {
         path: 'score/all',
-        component: QueryScore
+        component: QueryScore,
+        meta: {
+          title: ''
+        },
       }
     ]
   }
@@ -157,19 +223,10 @@ const router = new VueRouter({
 
 const url = ['', 'login', 'register', 'zhibo', 'kecheng', 'about']
 router.beforeEach((to, from, next) => {
-  /*for (let u of url) {
-    console.log(u);
-    if (to.path === '/' + u) {
-      next();
-    }
-  }*/
-  /*console.log(to.path);
-  let token = localStorage.getItem('Authorization');
-  if (token === null || token === '') {
-    next('/login');
-  } else {
-    next();
-  }*/
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
   next()
 
 })

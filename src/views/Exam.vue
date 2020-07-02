@@ -74,8 +74,8 @@
         duoList: [],
         userId: this.$store.state.user.userId,
         examId: this.$route.params.id,
-        minutes: 0, //分
-        seconds: 0, //秒
+        minutes: -1, //分
+        seconds: -1, //秒
         panAndDanOptions: {},
         duoOptions: {},
       }
@@ -113,14 +113,14 @@
     },
     methods: {
       num(n) {
-        // 倒计时结束重新刷新页面
+        // 倒计时结束自动交卷
         if (this.minutes === 15 && this.seconds === 0) {
           this.$message.warning('考试还剩15分钟结束!请抓紧时间!');
         }
         if (this.minutes === 0 && this.seconds === 30) {
           this.$message.error("30秒后将自动提交试卷");
         }
-        if (this.minutes === 0 && this.seconds === 1) {
+        if (this.minutes === 0 && this.seconds === 0) {
           this.btnClick();
         }
         return n < 10 ? '0' + n : '' + n;
