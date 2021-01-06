@@ -6,9 +6,9 @@ function request(config) {
     //wb中运行
     // baseURL: "http://127.0.0.1:8083",
     //本地部署
-    baseURL: "http://127.0.0.1/api",
+    // baseURL: "http://127.0.0.1/api",
     //服务器部署
-    // baseURL: "https://oe.sens.fun/api",
+    baseURL: "https://oe.sens.fun/api",
     timeout: 5000,
   })
   instance.interceptors.request.use(config => {

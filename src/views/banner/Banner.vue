@@ -1,14 +1,14 @@
 <template>
   <el-carousel :interval="4000"  height="310px">
     <el-carousel-item v-for="item in 6" :key="item">
-      <img class="img" :src="'https://cdn.sensen.fun/oe/img/banner-'+item+'.jpg'">
+      <img class="img" :src="'https://cdn.sens.fun/img/banner/banner-'+item+'.jpg'">
     </el-carousel-item>
   </el-carousel>
 </template>
 
 <script>
   export default {
-    name: "Banner"
+    name: "Banner",
   }
 </script>
 
